@@ -1,0 +1,30 @@
+Class.create for jQuery
+
+Function to create custom class just like prototype.js's "Class.create"
+
+version: 1.0
+author: mach3
+requires: jQuery
+
+example:
+
+	var MyClass = Class.create({
+		MY_EVENT:"myevent",
+		config:null,
+		initialize: function( config ){
+			$.extend( this.config, config );
+		}
+	});
+
+	var myobj = MyClass({hoo:"bar"});
+	myobj.bind( myobj.MY_EVENT, function(){ alert("MY_EVENT") } );
+	myobj.trigger( myobj.MY_EVENT );
+
+note:
+	
+	Created custom class automatically execute "initialize" method if it's defined,
+	when the class is defined as a instance.
+
+	The class can be used width jQuery's bind() and trigger() method.
+
+	Thas's all. Simple one.
