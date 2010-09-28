@@ -2,7 +2,7 @@ Class.create for jQuery
 
 Function to create custom class just like prototype.js's "Class.create"
 
-version: 1.2
+version: 1.1
 author: mach3
 requires: jQuery
 
