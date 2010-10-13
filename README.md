@@ -17,8 +17,8 @@ Require
 
 Author
 -----
-[blog.mach3.jp](http://blog.mach3.jp)
-[follow @mach3ss](http://www.twitter.com/mach3ss)
+- [blog.mach3.jp](http://blog.mach3.jp)
+- [follow @mach3ss](http://www.twitter.com/mach3ss)
 
 Usage
 -----
