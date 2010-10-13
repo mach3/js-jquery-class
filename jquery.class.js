@@ -1,5 +1,7 @@
-/**
+/*!
  * jQuery.class.js
+ * Copyirght (c) 2010, matsukaze.
+ * 
  * @version 1.1
  * @author mach3
  * @requires jQuery
@@ -13,7 +15,7 @@ $.extend( Class, {
 	 * @example var MyClass = Class.create(); MyClass.prototype = { ... };
 	 */
 	create: function( superClass ){
-		var s = superClass || {}, c;
+		var s = superClass || {};
 		return function(){
 			var pt = {
 				superclass:s.prototype,
