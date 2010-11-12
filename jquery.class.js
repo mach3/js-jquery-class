@@ -2,7 +2,7 @@
  * jQuery.class.js
  * Copyirght (c) 2010, matsukaze.
  * 
- * @version 1.1
+ * @version 1.1.1
  * @author mach3
  * @requires jQuery
  */
@@ -21,7 +21,11 @@ $.extend( Class, {
 				superclass:s.prototype,
 				bind:function( e, f ){ $(this).bind(e,f); },
 				trigger:function( e ){ $(this).trigger(e); },
-				log:function( m ){ if($.isFunction(console.log)){ console.log( m ); } }
+				log:function( m ){
+					if( typeof(console)!=="undefined" && $.isFunction(console.log) ){
+						console.log( m );
+					}
+				}
 			};
 			$.extend( true, pt, s.prototype, this );
 			$.extend( true, this, pt );
