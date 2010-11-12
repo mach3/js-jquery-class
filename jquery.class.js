@@ -22,7 +22,7 @@ $.extend( Class, {
 				bind:function( e, f ){ $(this).bind(e,f); },
 				trigger:function( e ){ $(this).trigger(e); },
 				log:function( m ){
-					if( typeof(console)!=="undefined" && $.isFunction(console.log) ){
+					if( typeof(console)!=="undefined" && typeof(console.log)!=="undefined" ){
 						console.log( m );
 					}
 				}
