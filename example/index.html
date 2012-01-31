@@ -1,0 +1,213 @@
+<!DOCTYPE HTML>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<title>Example for jQuery.class.js</title>
+	<style type="text/css">
+		body {
+			margin:0;
+			padding:0;
+			font-family:Arial, Helvetica, sans-serif;
+		}
+		#container {
+		}
+		h1 {
+			background-color:#465;
+			color:#fff;
+			padding:0.5em;
+			margin:0;
+		}
+		.section {
+			margin:15px;
+		}
+		.section pre {
+			margin:1em 0;
+			background-color:#eee;
+			padding:1em;
+		}
+		.section pre#source {
+			background-color:#222;
+			color:#eee;
+		}
+		.section .comment {
+			color:#fc0;
+		}
+	</style>
+</head>
+<body>
+
+<!-- #container -->
+<div id="container">
+	<h1>Example for jQuery.class.js</h1>
+	<!-- .section -->
+	<div class="section">
+		<h2>Result Output</h2>
+		<pre id="log"></pre>
+	</div>
+	<!-- /.section -->
+	<!-- .section -->
+	<div class="section">
+		<h2>Example Source</h2>
+		<pre id="source"></pre>
+	</div>
+	<!-- /.section -->
+</div>
+<!-- /#container -->
+
+<script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
+<script type="text/javascript" src="../jquery.class.js"></script>
+
+<script type="text/javascript" id="example-source">
+(function($,undefined){
+
+	var test = function(msg){
+		$("#log").append( (msg||"") + "\n");
+	};
+
+	(function(){
+		/**
+		 * シンプルな例
+		 * Simple one
+		 */
+		test("[ Simple Example ]");
+
+		var Animal = Class.create();
+		Animal.prototype = {
+			name : null,
+			legs : null,
+			initialize : function( name, legs ){
+				this.name = name;
+				this.legs = legs;
+				test(this.name + " is initialized.");
+			},
+			walk : function(){
+				test(this.name + " is walking with " + this.legs + " legs now.")
+			}
+		};
+		var dog = new Animal("Dog",4); // => Dog is initialized.
+		dog.walk(); // => Dog is walking with 4 legs now.
+
+		test();
+
+		/**
+		 * 継承の例
+		 * Inheritance 
+		 */
+		test("[ Inheritance Example ]");
+
+		var Human = Class.create(Animal);
+		Human.prototype = {
+			age : null,
+			initialize : function(name, age){
+				this.superclass.initialize.apply(this, [ name, 2 ]);
+				this.age = age;
+			},
+			introduce : function(){
+				var self = this;
+				test(
+					"{{name}} says, 'Hi, my name is {{name}}, {{age}} years old.'"
+					.replace( /{{(.+?)}}/g, function(){ return self[arguments[1]] ; })
+				);
+			}
+		};
+
+		var john = new Human("John", 18); // => John is initialized.
+		john.walk(); // => John is walking with 2 legs now.
+		john.introduce(); // => John says, 'Hi, my name is John, 18 years old.'
+
+		test();
+	})();
+
+	(function(){
+		/**
+		 * より短く書く為のClass.get()の例
+		 * Shorter example.
+		 */
+		test("[ Shorter Example ]");
+
+		var Bird = Class.get({
+			type : "Bird",
+			fly : function(){
+				test( this.type + " can fly !");
+			}
+		});
+		var Penguin = Class.get({
+			type : "Penguin",
+			fly : function(){
+				test( this.type + " cannot fly !");
+			}
+		}, Bird);
+
+		var myBird = new Bird();
+		myBird.fly(); // => Bird can fly !
+
+		var myPenguin = new Penguin();
+		myPenguin.fly(); // => Penguin cannot fly !
+
+		test();
+	})();
+	
+	(function(){
+		/**
+		 * イベント
+		 * Events
+		 */
+		test("[ Event Example ]");
+
+		var Data = Class.create();
+		Data.prototype = {
+			EVENT_ITEM_ADDED : "item_added",
+			items : [],
+			addItem : function(){
+				for(i in arguments){
+					this.items.push(arguments[i]);
+				}
+				this.trigger(this.EVENT_ITEM_ADDED);
+			},
+			getItemCount : function(){
+				return this.items.length;
+			}
+		};
+
+		var myData = new Data();
+		var onAdded = function(){
+			test("Items added. I have " + this.getItemCount() + " items now.");
+		};
+
+		/**
+		 * Add event listener by on()
+		 * ( 'bind' also available )
+		 */
+		myData.on(myData.EVENT_ITEM_ADDED, onAdded);
+		myData.addItem("hoge"); // => Items added. I have 1 items now.
+		myData.addItem("fuga","foo","bar"); // => Items added. I have 4 items now.
+
+		/**
+		 * Remove event listener by off()
+		 * ( 'unbind' also available )
+		 */
+		myData.off(myData.EVENT_ITEM_ADDED, onAdded);
+		myData.addItem("piyo"); // (nothing occurs)
+	})();
+
+	/**
+	 * 終わり
+	 * That's all. Thanks.
+	 */
+
+})(jQuery);
+</script>
+
+<script type="text/javascript">
+(function($,undefined){
+	var comment = '<span class="comment">{{c}}</span>';
+	$("#source").append(
+		$("#example-source").text()
+		.replace(/(^\s+?|\s+?$)/g,"")
+		.replace(/(\/\/.+?$|\/\*[\s\S]+?\*\/)/gm, function(){ return comment.replace("{{c}}", arguments[0]); })
+	);
+})(jQuery);
+</script>
+
+</body>
+</html>

@@ -1,23 +1,24 @@
-﻿#Class.create for jQuery
+﻿##Class.create for jQuery
 
 Function to create custom class just like prototype.js's "Class.create"
 
-##This does
+###This does
 
 - Make it easy to create class object, just like Prototype.js
-- Enable us to handle events of instance, using jQuery's bind/trigger
+- Enable us to handle custome events of instance, using jQuery's on/off
 - Enable us to create class simpler style
 
-##Require
+###Requirement
 
 - jQuery
 
-##Author
+###Author
 
+- [www.mach3.jp](http://www.mach3.jp)
 - [blog.mach3.jp](http://blog.mach3.jp)
 - [follow @mach3ss](http://www.twitter.com/mach3ss)
 
-##Usage
+###Usage
 
 Traditional style as Prototype.js ( Class.create )  
 "initialize" method is automatically executed when a new instance is defined.
@@ -48,9 +49,9 @@ Inheritance.
 		bark: function(){
 			alert("bow-wow");
 		}
-	}
+	};
 
-More simple style
+More simple style.
 
 	var Animal = Class.get({
 		walk:function(){
@@ -61,9 +62,9 @@ More simple style
 		bark:function(){
 			alert("bow-wow");
 		}
-	});
+	}, Animal);
 
-Events
+Add/remove event listeners.
 
 	var Data = Class.get({
 		ITEM_ADDED:"item_added", // Event name as constant
@@ -76,18 +77,33 @@ Events
 			return this.items.length;
 		}
 	});
+
 	var myData = new Data();
-	// Add event listener using "bind"
-	myData.bind( myData.ITEM_ADDED, function(e){
+	var onAdded = function(){
 		alert("ItemsCount : " + this.getItemCount() );
-	});
-	myData.addItem( "hoge" );
+	};
+
+	/**
+	 * Add event listener using "on"
+	 * ( or use "bind" when your jQuery 1.6.x or earlier )
+	 */
+	myData.on( myData.ITEM_ADDED, onAdded );
+	myData.addItem( "hoge" ); // => ItemCount : 1
+	myData.addItem( "fuga" ); // => ItemCount : 2 
+
+	/**
+	 * Remove event listener using "off"
+	 * ( or use "unbind" when your jQuery 1.6.x or earlier )
+	 */
+	myData.off( myData.ITEM_ADDED, onAdded );
+
 
 ##Version
 
-1.1.1 : Bug fix ( about console.log )
-1.1 : Some feature added
-1.0 : Release
+- 1.2   : Add on/off methods for jQuery 1.7 or later
+- 1.1.1 : Bug fix ( about console.log )
+- 1.1   : Some feature added
+- 1.0   : Release
 
 
 ##License
