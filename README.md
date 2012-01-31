@@ -1,4 +1,5 @@
-﻿##Class.create for jQuery
+﻿
+##Class.create for jQuery
 
 Function to create custom class just like prototype.js's "Class.create"
 
