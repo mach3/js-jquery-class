@@ -1,25 +1,25 @@
 ﻿
-##Class.create for jQuery
+#Class.create for jQuery
 
 Function to create custom class just like prototype.js's "Class.create"
 
-###This does
+##This does
 
 - Make it easy to create class object, just like Prototype.js
 - Enable us to handle custome events of instance, using jQuery's on/off
 - Enable us to create class simpler style
 
-###Requirement
+##Requirement
 
 - jQuery
 
-###Author
+##Author
 
 - [www.mach3.jp](http://www.mach3.jp)
 - [blog.mach3.jp](http://blog.mach3.jp)
 - [follow @mach3ss](http://www.twitter.com/mach3ss)
 
-###Usage
+##Usage
 
 Traditional style as Prototype.js ( Class.create )  
 "initialize" method is automatically executed when a new instance is defined.

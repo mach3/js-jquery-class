@@ -5,7 +5,7 @@
  * 
  * @version 1.2
  * @author mach3
- * @requires jQuery 1.7 or later
+ * @requires jQuery
  */
 var Class = (Class) ? Class : {};
 $.extend( Class, {
@@ -13,8 +13,8 @@ $.extend( Class, {
 	 * Function to attach class feature to function, 
 	 * just like prototype.js's "Class.create()" method.
 	 * 
-	 * @param {Object} superClass Super class object. (optional)
-	 * @return {Object} Function which has class feature.
+	 * @param Object superClass Super class object. (optional)
+	 * @return Object Function which has class feature.
 	 * @example
 	 *   var MyClass = Class.create(); 
 	 *   MyClass.prototype = { ... };
@@ -45,9 +45,9 @@ $.extend( Class, {
 	/**
 	 * Function to get class defenition directly, wrapper of create().
 	 *
-	 * @param {Object} def Definition of the class. (required)
-	 * @param {Object} superClass Super class object. (optional)
-	 * @return {Object} Class defenition
+	 * @param Object def Definition of the class. (required)
+	 * @param Object superClass Super class object. (optional)
+	 * @return Object Class defenition
 	 * @example 
 	 *   var MyClass = Class.get( { ... }, MySuperClass );
 	 */
