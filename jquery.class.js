@@ -3,7 +3,7 @@
  * Copyirght (c) 2010, matsukaze.
  * Lisenced under the MIT license.
  * 
- * @version 1.2
+ * @version 1.2.1
  * @author mach3
  * @requires jQuery
  */
@@ -24,8 +24,9 @@ $.extend( Class, {
 		return function(){
 			var pt = {
 				superclass:s.prototype,
-				bind:function( e, f ){ $(this).bind(e,f); },
-				trigger:function( e ){ $(this).trigger(e); },
+				unbind:function(){ $.fn.unbind.apply($(this), arguments); },
+				bind:function(){ $.fn.bind.apply($(this), arguments); },
+				trigger:function(){ $.fn.trigger.apply($(this), arguments); },
 				log:function( m ){
 					if( typeof(console)!=="undefined" && typeof(console.log)!=="undefined" ){
 						console.log( m );
@@ -38,8 +39,9 @@ $.extend( Class, {
 			}
 			$.extend( true, pt, s.prototype, this );
 			$.extend( true, this, pt );
-			try{ this.initialize.apply(this, arguments); }
-			catch(e){}
+			if( $.isFunction(this.initialize) ){
+				this.initialize.apply(this, arguments);
+			}
 		};
 	},
 	/**

@@ -101,6 +101,7 @@ Add/remove event listeners.
 
 ##Version
 
+- 1.2.1 : Fix bug, and add unbind()
 - 1.2   : Add on/off methods for jQuery 1.7 or later
 - 1.1.1 : Bug fix ( about console.log )
 - 1.1   : Some feature added
