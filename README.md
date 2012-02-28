@@ -98,9 +98,29 @@ Add/remove event listeners.
 	 */
 	myData.off( myData.ITEM_ADDED, onAdded );
 
+If you want to use Object as the property of instance,  
+use initObject() to make it instance's own property.  
+( If not, that refers to the one of prototype )
+
+	/**
+	 * Use initObject()
+	 */
+	var Foo = Class.reate();
+	Foo.prototype = {
+		data : {
+			hoge : 1,
+			fuga : 2
+		},
+		initialize : function(){
+			// make "data" property instance's own one
+			this.initObject("data");
+		}
+	};
+
 
 ##Version
 
+- 1.2.2 : Remove log(), add initObject()
 - 1.2.1 : Fix bug, and add unbind()
 - 1.2   : Add on/off methods for jQuery 1.7 or later
 - 1.1.1 : Bug fix ( about console.log )
