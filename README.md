@@ -99,7 +99,7 @@ Add/remove event listeners.
 	myData.off( myData.ITEM_ADDED, onAdded );
 
 If you want to use Object as the property of instance,  
-use initObject() to make it instance's own property.  
+use rebase() to make it instance's own property.  
 ( If not, that refers to the one of prototype )
 
 	/**
@@ -113,13 +113,14 @@ use initObject() to make it instance's own property.
 		},
 		initialize : function(){
 			// make "data" property instance's own one
-			this.initObject("data");
+			this.rebase("data");
 		}
 	};
 
 
 ##Version
 
+- 1.2.3 : Rename initObject() to rebase()
 - 1.2.2 : Remove log(), add initObject()
 - 1.2.1 : Fix bug, and add unbind()
 - 1.2   : Add on/off methods for jQuery 1.7 or later
